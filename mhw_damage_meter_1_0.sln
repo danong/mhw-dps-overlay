@@ -1,0 +1,20 @@
+
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mhw_dps_wpf", "mhw_damage_meter_1_0.csproj", "{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
