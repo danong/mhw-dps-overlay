@@ -235,10 +235,10 @@ namespace mhw_dps_wpf
                 Canvas.SetLeft((UIElement)this.player_dmg_tbs[index], this.front_canvas.ActualWidth - this.player_dmg_tbs[index].Width - 3.0);
                 this.front_canvas.Children.Add((UIElement)this.player_dmg_tbs[index]);
             }
-            this.player_name_tbs[0].Text = "This is Daniel";
-            this.player_name_tbs[1].Text = "I'm modifying the mod now!";
-            this.player_name_tbs[2].Text = "Click and drag to move";
-            this.player_name_tbs[3].Text = "Scroll mouse wheel to zoom";
+            this.player_name_tbs[0].Text = "Drag to move this overlay";
+            this.player_name_tbs[1].Text = "Mouse wheel to zoom";
+            this.player_name_tbs[2].Text = "";
+            this.player_name_tbs[3].Text = "";
             this.update_layout();
         }
 
