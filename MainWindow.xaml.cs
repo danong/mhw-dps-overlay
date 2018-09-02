@@ -40,8 +40,6 @@ namespace mhw_dps_wpf
     private double last_activated = MainWindow.time();
     private Process game;
     private bool init_finished;
-    internal Canvas front_canvas;
-    private bool _contentLoaded;
 
     public MainWindow()
     {
@@ -217,10 +215,10 @@ namespace mhw_dps_wpf
         Canvas.SetLeft((UIElement) this.player_dmg_tbs[index], this.front_canvas.ActualWidth - this.player_dmg_tbs[index].Width - 3.0);
         this.front_canvas.Children.Add((UIElement) this.player_dmg_tbs[index]);
       }
-      this.player_name_tbs[0].Text = "拖统计条：移动窗口";
-      this.player_name_tbs[1].Text = "drag bars to move";
-      this.player_name_tbs[2].Text = "滚轮：放大缩小窗口";
-      this.player_name_tbs[3].Text = "mouse wheel to zoom";
+      this.player_name_tbs[0].Text = "This is Daniel";
+      this.player_name_tbs[1].Text = "I'm modifying the mod now!";
+      this.player_name_tbs[2].Text = "Click and drag to move";
+      this.player_name_tbs[3].Text = "Scroll mouse wheel to zoom";
       this.update_layout();
     }
 
@@ -290,35 +288,5 @@ namespace mhw_dps_wpf
       }
     }
 
-    [DebuggerNonUserCode]
-    [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-    public void InitializeComponent()
-    {
-      if (this._contentLoaded)
-        return;
-      this._contentLoaded = true;
-      Application.LoadComponent((object) this, new Uri("/mhw_dps_wpf;component/mainwindow.xaml", UriKind.Relative));
-    }
-
-    [DebuggerNonUserCode]
-    [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    void IComponentConnector.Connect(int connectionId, object target)
-    {
-      if (connectionId != 1)
-      {
-        if (connectionId == 2)
-          this.front_canvas = (Canvas) target;
-        else
-          this._contentLoaded = true;
-      }
-      else
-      {
-        ((FrameworkElement) target).Loaded += new RoutedEventHandler(this.Window_Loaded);
-        ((FrameworkElement) target).SizeChanged += new SizeChangedEventHandler(this.Window_SizeChanged);
-        ((UIElement) target).MouseDown += new MouseButtonEventHandler(this.Window_MouseDown);
-        ((UIElement) target).MouseWheel += new MouseWheelEventHandler(this.Window_MouseWheel);
-      }
-    }
   }
 }

@@ -1,20 +1,30 @@
-
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mhw_dps_wpf", "mhw_damage_meter_1_0.csproj", "{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mhw_damage_meter_1_0", "mhw_damage_meter_1_0.csproj", "{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}.Debug|x64.ActiveCfg = Debug|x64
+		{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}.Debug|x64.Build.0 = Debug|x64
 		{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}.Release|x64.ActiveCfg = Release|x64
+		{D4F66696-B9F6-4DDD-B068-7C09EBDD4242}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4144D727-8B45-4CE5-B879-CD2E9A0D7CE1}
 	EndGlobalSection
 EndGlobal

@@ -13,7 +13,7 @@ namespace mhw_dps_wpf
 {
   public class App : Application
   {
-    [DebuggerNonUserCode]
+    // [DebuggerNonUserCode]
     [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
     public void InitializeComponent()
     {
@@ -21,7 +21,7 @@ namespace mhw_dps_wpf
     }
 
     [STAThread]
-    [DebuggerNonUserCode]
+    // [DebuggerNonUserCode]
     [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
     public static void Main()
     {
