@@ -34,7 +34,7 @@ namespace mhw_dps_wpf
         private string[] player_names = new string[4];
         private int[] player_damages = new int[4] { 0, 0, 0, 0 };
         private int[] prev_player_damages = new int[4] { 0, 0, 0, 0 };
-        private int[] player_daamges_avg = new int[4] { 0, 0, 0, 0 };
+        private float[] player_damages_avg = new float[4] { 0, 0, 0, 0 };
         private int my_seat_id = -5;
         private Rectangle[] damage_bar_rects = new Rectangle[4];
         private TextBlock[] player_name_tbs = new TextBlock[4];
@@ -42,7 +42,8 @@ namespace mhw_dps_wpf
         private double last_activated = MainWindow.time();
         private Process game;
         private bool init_finished;
-
+        private bool in_quest = false;
+        private DateTime first_damage_timestamp = new DateTime();
         public MainWindow()
         {
             this.Topmost = true;
@@ -82,6 +83,12 @@ namespace mhw_dps_wpf
             int playerSeatId = mhw.get_player_seat_id(this.game);
             if (((IEnumerable<int>)teamDmg).Sum() != 0 && playerSeatId >= 0 && teamPlayerNames[0] != "")
             {
+                if (!this.in_quest)
+                {
+                    this.in_quest = true;
+                    this.first_damage_timestamp = DateTime.UtcNow;
+                }
+                
                 this.prev_player_damages = this.player_damages;
                 this.player_damages = teamDmg;
                 this.player_names = teamPlayerNames;
@@ -105,16 +112,20 @@ namespace mhw_dps_wpf
             {
                 for (int index = 0; index < 4; ++index)
                 {
+                    float dps = this.player_damages[index] / (float)(this.first_damage_timestamp - DateTime.UtcNow).TotalSeconds;
                     this.player_name_tbs[index].Text = this.player_names[index];
-                    this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : this.player_damages[index].ToString() + " (" + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "%)";
+                    this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : this.player_damages[index].ToString() + " (" + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "%) " + dps.ToString("0.0") + " DPS";
                 }
             }
             else
             {
                 for (int index = 0; index < 4; ++index)
                 {
+                    int new_sample = this.player_damages[index] - this.prev_player_damages[index];
+                    this.player_damages_avg[index] -= this.player_damages_avg[index] / 8;
+                    this.player_damages_avg[index] += new_sample / 8;
                     this.player_name_tbs[index].Text = this.player_names[index];
-                    this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : " " + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "%";
+                    this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : " " + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "% " + this.player_damages_avg[index].ToString("0.0") + " DPS";
                 }
                 if (num == 0)
                 {
@@ -229,7 +240,7 @@ namespace mhw_dps_wpf
         {
             this.init_canvas();
             this.dispatcherTimer.Tick += new EventHandler(this.update_tick);
-            this.dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 150);
+            this.dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
             this.dispatcherTimer.Start();
             this.ShowInTaskbar = false;
             this.ShowInTaskbar = true;
