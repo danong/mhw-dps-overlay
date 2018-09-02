@@ -43,7 +43,8 @@ namespace mhw_dps_wpf
         private Process game;
         private bool init_finished;
         private bool in_quest = false;
-        private DateTime first_damage_timestamp = new DateTime();
+        private DateTime first_damage = new DateTime();
+        private DateTime quest_end = new DateTime();
         public MainWindow()
         {
             this.Topmost = true;
@@ -86,7 +87,7 @@ namespace mhw_dps_wpf
                 if (!this.in_quest)
                 {
                     this.in_quest = true;
-                    this.first_damage_timestamp = DateTime.UtcNow;
+                    this.first_damage = DateTime.UtcNow;
                 }
                 
                 this.prev_player_damages = this.player_damages;
@@ -99,6 +100,11 @@ namespace mhw_dps_wpf
             {
                 if (this.my_seat_id == -5)
                     return;
+                if (this.in_quest)
+                {
+                    this.in_quest = false;
+                    this.quest_end = DateTime.UtcNow;
+                }
                 this.update_info(true);
             }
         }
@@ -112,7 +118,7 @@ namespace mhw_dps_wpf
             {
                 for (int index = 0; index < 4; ++index)
                 {
-                    float dps = this.player_damages[index] / (float)(this.first_damage_timestamp - DateTime.UtcNow).TotalSeconds;
+                    float dps = this.player_damages[index] / (float)(this.quest_end - this.first_damage).TotalSeconds;
                     this.player_name_tbs[index].Text = this.player_names[index];
                     this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : this.player_damages[index].ToString() + " (" + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "%) " + dps.ToString("0.0") + " DPS";
                 }
