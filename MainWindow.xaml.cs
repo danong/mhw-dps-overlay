@@ -122,6 +122,8 @@ namespace mhw_dps_wpf
                     float dps = this.player_damages[index] / (float)(this.quest_end - this.first_damage).TotalSeconds;
                     this.player_name_tbs[index].Text = this.player_names[index];
                     this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : this.player_damages[index].ToString() + " (" + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "%) " + dps.ToString("0.0") + " DPS ";
+        
+                    this.player_dmg_tbs[index].TextAlignment = TextAlignment.Right;
                 }
             }
             else
@@ -133,6 +135,8 @@ namespace mhw_dps_wpf
                     this.player_damages_avg[index] += new_sample / 8;
                     this.player_name_tbs[index].Text = this.player_names[index];
                     this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : " " + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "% " + this.player_damages_avg[index].ToString("0.0") + " DPS ";
+
+                    this.player_dmg_tbs[index].TextAlignment = TextAlignment.Right;
                 }
                 if (num == 0)
                 {
@@ -145,7 +149,9 @@ namespace mhw_dps_wpf
                     {
                         this.damage_bar_rects[index].Width = (double)this.player_damages[index] / (double)((IEnumerable<int>)this.player_damages).Max() * this.front_canvas.ActualWidth;
                         if (index == this.my_seat_id)
+                        {
                             this.damage_bar_rects[index].StrokeThickness = 1.0;
+                        }
                         else
                             this.damage_bar_rects[index].StrokeThickness = 0.0;
                     }
@@ -219,6 +225,7 @@ namespace mhw_dps_wpf
                 this.front_canvas.Children.Add((UIElement)this.player_name_tbs[index]);
                 this.player_dmg_tbs[index] = new TextBlock();
                 this.player_dmg_tbs[index].TextAlignment = TextAlignment.Right;
+                //this.player_dmg_tbs[index].Background = Brushes.White;
                 this.player_dmg_tbs[index].Text = (index * 4000).ToString() + " (125.4%)";
                 this.player_dmg_tbs[index].Effect = (Effect)new DropShadowEffect()
                 {
@@ -228,12 +235,12 @@ namespace mhw_dps_wpf
                     Opacity = 1.0
                 };
                 this.player_dmg_tbs[index].FontWeight = FontWeights.Bold;
-                this.player_dmg_tbs[index].FontSize = 16.0;
+                this.player_dmg_tbs[index].FontSize = 14.0;
                 this.player_dmg_tbs[index].Foreground = (Brush)new SolidColorBrush(Colors.White);
                 this.player_dmg_tbs[index].Width = 175.0;
                 this.player_dmg_tbs[index].Height = 40.0;
                 Canvas.SetTop((UIElement)this.player_dmg_tbs[index], (double)index * num2 + 0.5 * num1 - 14.0);
-                Canvas.SetLeft((UIElement)this.player_dmg_tbs[index], this.front_canvas.ActualWidth - this.player_dmg_tbs[index].Width - 3.0);
+                Canvas.SetLeft((UIElement)this.player_dmg_tbs[index], this.front_canvas.ActualWidth - this.player_dmg_tbs[index].Width);
                 this.front_canvas.Children.Add((UIElement)this.player_dmg_tbs[index]);
             }
             this.player_name_tbs[0].Text = "Drag to move this overlay";
