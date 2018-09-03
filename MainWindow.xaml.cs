@@ -88,6 +88,8 @@ namespace mhw_dps_wpf
                 {
                     this.in_quest = true;
                     this.first_damage = DateTime.UtcNow;
+                    Array.Clear(this.prev_player_damages, 0, this.prev_player_damages.Length);
+                    Array.Clear(this.player_damages, 0, this.player_damages.Length);
                 }
                 
                 this.prev_player_damages = this.player_damages;
