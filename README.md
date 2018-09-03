@@ -14,6 +14,11 @@ During hunts, this mod displays the percent of total team damage done and the [e
 ## Known Limitations/Bugs
 
 - Post-hunt DPS is low because it includes the 60/20 seconds period after the hunt and the time spent in the post-hunt summary pages (possibly).
+- Negative intial DPS values during hunts.
+
+## Contributing Guide
+
+Contributions are welcome. Feel free to make an issue or pull request. This project is licensed under the MIT license.
 
 ## Credits
 
@@ -24,7 +29,8 @@ During hunts, this mod displays the percent of total team damage done and the [e
 ### Basic Functionality
 - [x] Implement DPS calculation
 - [x] Fix numbers for subsequent hunts
-- [ ] Fix post hunt DPS calculation. Maybe store the last damage timestamp and use that as the end time for calculating overall DPS.
+- [ ] Fix post hunt DPS calculation. Maybe store the last damage timestamp and use that as the end time for calculating overall DPS
+- [ ] Fix negative values DPS values
 
 ### UI/UX
 - [ ] Fix character clipping
