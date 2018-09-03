@@ -103,6 +103,7 @@ namespace mhw_dps_wpf
                 if (this.in_quest)
                 {
                     this.in_quest = false;
+                    Array.Clear(this.player_damages_avg, 0, this.player_damages_avg.Length);
                     this.quest_end = DateTime.UtcNow;
                 }
                 this.update_info(true);
@@ -120,7 +121,7 @@ namespace mhw_dps_wpf
                 {
                     float dps = this.player_damages[index] / (float)(this.quest_end - this.first_damage).TotalSeconds;
                     this.player_name_tbs[index].Text = this.player_names[index];
-                    this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : this.player_damages[index].ToString() + " (" + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "%) " + dps.ToString("0.0") + " DPS";
+                    this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : this.player_damages[index].ToString() + " (" + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "%) " + dps.ToString("0.0") + " DPS ";
                 }
             }
             else
@@ -131,7 +132,7 @@ namespace mhw_dps_wpf
                     this.player_damages_avg[index] -= this.player_damages_avg[index] / 8;
                     this.player_damages_avg[index] += new_sample / 8;
                     this.player_name_tbs[index].Text = this.player_names[index];
-                    this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : " " + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "% " + this.player_damages_avg[index].ToString("0.0") + " DPS";
+                    this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : " " + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "% " + this.player_damages_avg[index].ToString("0.0") + " DPS ";
                 }
                 if (num == 0)
                 {
