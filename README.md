@@ -7,14 +7,13 @@ During hunts, this mod displays the percent of total team damage done and the [e
 
 ## Instructions
 
-1. Run Monster Hunter: World
-2. Run this mod and adjust the position and size of the overlay
+1. Run Monster Hunter: World in borderless windowed mode
+2. Run this mod and adjust the position/size of the overlay
 3. Enjoy the hunt!
 
 ## Known Limitations/Bugs
 
 - Post-hunt DPS is low because it includes the 60/20 seconds period after the hunt and the time spent in the post-hunt summary pages (possibly).
-- Negative intial DPS values during hunts.
 
 ## Contributing Guide
 
