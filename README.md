@@ -18,25 +18,8 @@ During hunts, this mod displays the percent of total team damage done and the [e
 
 ## Contributing Guide
 
-Contributions are welcome. Feel free to make an issue or pull request. This project is licensed under the MIT license.
+Contributions and forks are welcome. Please take a look at our Issues and Projects pages and feel free to make an issue or pull request. This project is licensed under the MIT license.
 
 ## Credits
 
 [Original mod](https://www.nexusmods.com/monsterhunterworld/mods/88) by [hqvrrsc4](https://www.nexusmods.com/monsterhunterworld/users/7950104). Modified with permission.
-
-## Todo 
-
-### Basic Functionality
-- [x] Implement DPS calculation
-- [x] Fix numbers for subsequent hunts
-- [ ] Fix post hunt DPS calculation. Maybe store the last damage timestamp and use that as the end time for calculating overall DPS
-- [ ] Fix negative values DPS values
-
-### UI/UX
-- [ ] Fix character clipping
-- [ ] Improve overlay UI
-
-### Misc.
-- [ ] Publish to NexusMods
-- [ ] Add a license to this repo
-- [ ] Add more details and screenshots to the README
