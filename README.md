@@ -4,6 +4,8 @@ This mod displays the damage breakdown and DPS of your current team.
 
 During hunts, this mod displays the percent of total team damage done and the [exponential moving average](https://en.wikipedia.org/wiki/Moving_average#Exponential_moving_average) of DPS of each player. After hunts, this mod displays the damage, percent of total team damage, and the overall DPS of each player.
 
+Distributed on [Nexus Mods](https://www.nexusmods.com/monsterhunterworld/mods/105).
+
 
 ## Instructions
 
@@ -11,13 +13,12 @@ During hunts, this mod displays the percent of total team damage done and the [e
 2. Run this mod and adjust the position/size of the overlay
 3. Enjoy the hunt!
 
-## Known Limitations/Bugs
-
-- Post-hunt DPS is low because it includes the 60/20 seconds period after the hunt and the time spent in the post-hunt summary pages (possibly).
 
 ## Contributing Guide
 
-Contributions and forks are welcome. Please take a look at our Issues and Projects pages and feel free to make an issue or pull request. This project is licensed under the MIT license.
+Contributions and forks are welcome. Please take a look at our Issues and Projects pages and feel free to make an issue or pull request. This project is licensed under the MIT license. 
+
+The minimum supported version of Visual Studio is 10.0.40219.1 but we recommend using 15.0.28010.2016 or later.
 
 ## Credits
 
