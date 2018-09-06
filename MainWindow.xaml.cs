@@ -40,6 +40,10 @@ namespace mhw_dps_wpf
         private TextBlock[] player_name_tbs = new TextBlock[4];
         private TextBlock[] player_dmg_tbs = new TextBlock[4];
         private double last_activated = MainWindow.time();
+        private static byte?[] pattern_1;
+        private static byte?[] pattern_2;
+        private static byte?[] pattern_3;
+        private static byte?[] pattern_4;
         private Process game;
         private bool init_finished;
         private bool in_quest = false;
@@ -52,6 +56,27 @@ namespace mhw_dps_wpf
             this.WindowStyle = WindowStyle.None;
             this.Background = (Brush)Brushes.Transparent;
             this.find_game_proc();
+            ulong[] patterns = memory.find_patterns(this.game, (IntPtr)5368725504L, (IntPtr)5452595200L, new List<byte?[]>()
+              {
+                MainWindow.pattern_1,
+                MainWindow.pattern_2,
+                MainWindow.pattern_3,
+                MainWindow.pattern_4
+              });
+            MainWindow.assert(patterns[0] > 5369757695UL && patterns[1] > 5369757695UL && patterns[1] > 5369757695UL && patterns[3] > 5369757695UL, "failed to locate offsets (step 1).", true);
+            ulong num1 = patterns[0] + (ulong)mhw.read_uint(this.game.Handle, (IntPtr)((long)patterns[0] + 2L)) + 6UL;
+            ulong num2 = patterns[1] + 51UL + (ulong)mhw.read_uint(this.game.Handle, (IntPtr)((long)patterns[1] + 54L)) + 7UL;
+            ulong num3 = patterns[2] + 15UL + (ulong)mhw.read_uint(this.game.Handle, (IntPtr)((long)patterns[2] + 15L + 2L)) + 6UL;
+            ulong num4 = patterns[3] + (ulong)mhw.read_uint(this.game.Handle, (IntPtr)((long)patterns[3] + 3L)) + 7UL;
+            Console.WriteLine(num1.ToString("X"));
+            Console.WriteLine(num2.ToString("X"));
+            Console.WriteLine(num3.ToString("X"));
+            Console.WriteLine(num4.ToString("X"));
+            MainWindow.assert(num1 > 5368725504UL && num1 < 5637144576UL && (num2 > 5368725504UL && num2 < 5637144576UL) && (num3 > 5368725504UL && num3 < 5637144576UL && num4 > 5368725504UL) && num4 < 5637144576UL, "failed to locate offsets (step 2).", true);
+            mhw.loc1 = (long)num1;
+            mhw.loc2 = (long)num2;
+            mhw.loc3 = (long)num3;
+            mhw.loc4 = (long)num4;
             this.InitializeComponent();
         }
 
@@ -316,6 +341,125 @@ namespace mhw_dps_wpf
                     return;
                 this.Height = num2;
             }
+        }
+
+        static MainWindow()
+        {
+            byte?[] nullableArray1 = new byte?[26];
+            nullableArray1[0] = new byte?((byte)139);
+            nullableArray1[1] = new byte?((byte)13);
+            nullableArray1[6] = new byte?((byte)35);
+            nullableArray1[7] = new byte?((byte)202);
+            nullableArray1[8] = new byte?((byte)129);
+            nullableArray1[9] = new byte?((byte)249);
+            nullableArray1[10] = new byte?((byte)0);
+            nullableArray1[11] = new byte?((byte)1);
+            nullableArray1[12] = new byte?((byte)0);
+            nullableArray1[13] = new byte?((byte)0);
+            nullableArray1[14] = new byte?((byte)115);
+            nullableArray1[15] = new byte?((byte)47);
+            nullableArray1[16] = new byte?((byte)15);
+            nullableArray1[17] = new byte?((byte)183);
+            nullableArray1[23] = new byte?((byte)193);
+            nullableArray1[24] = new byte?((byte)234);
+            nullableArray1[25] = new byte?((byte)16);
+            MainWindow.pattern_1 = nullableArray1;
+            byte?[] nullableArray2 = new byte?[58];
+            nullableArray2[0] = new byte?((byte)72);
+            nullableArray2[1] = new byte?((byte)137);
+            nullableArray2[2] = new byte?((byte)116);
+            nullableArray2[3] = new byte?((byte)36);
+            nullableArray2[4] = new byte?((byte)56);
+            nullableArray2[5] = new byte?((byte)139);
+            nullableArray2[6] = new byte?((byte)112);
+            nullableArray2[7] = new byte?((byte)24);
+            nullableArray2[8] = new byte?((byte)72);
+            nullableArray2[9] = new byte?((byte)139);
+            nullableArray2[15] = new byte?((byte)137);
+            nullableArray2[16] = new byte?((byte)136);
+            nullableArray2[17] = new byte?((byte)12);
+            nullableArray2[18] = new byte?((byte)5);
+            nullableArray2[19] = new byte?((byte)0);
+            nullableArray2[20] = new byte?((byte)0);
+            nullableArray2[21] = new byte?((byte)72);
+            nullableArray2[22] = new byte?((byte)139);
+            nullableArray2[28] = new byte?((byte)137);
+            nullableArray2[29] = new byte?((byte)144);
+            nullableArray2[30] = new byte?((byte)16);
+            nullableArray2[31] = new byte?((byte)5);
+            nullableArray2[32] = new byte?((byte)0);
+            nullableArray2[33] = new byte?((byte)0);
+            nullableArray2[34] = new byte?((byte)72);
+            nullableArray2[35] = new byte?((byte)139);
+            nullableArray2[41] = new byte?((byte)137);
+            nullableArray2[42] = new byte?((byte)152);
+            nullableArray2[43] = new byte?((byte)20);
+            nullableArray2[44] = new byte?((byte)5);
+            nullableArray2[45] = new byte?((byte)0);
+            nullableArray2[46] = new byte?((byte)0);
+            nullableArray2[47] = new byte?((byte)133);
+            nullableArray2[48] = new byte?((byte)219);
+            nullableArray2[49] = new byte?((byte)126);
+            nullableArray2[51] = new byte?((byte)72);
+            nullableArray2[52] = new byte?((byte)139);
+            MainWindow.pattern_2 = nullableArray2;
+            byte?[] nullableArray3 = new byte?[21];
+            nullableArray3[0] = new byte?((byte)178);
+            nullableArray3[1] = new byte?((byte)172);
+            nullableArray3[2] = new byte?((byte)11);
+            nullableArray3[3] = new byte?((byte)0);
+            nullableArray3[4] = new byte?((byte)0);
+            nullableArray3[5] = new byte?((byte)73);
+            nullableArray3[6] = new byte?((byte)139);
+            nullableArray3[7] = new byte?((byte)217);
+            nullableArray3[8] = new byte?((byte)139);
+            nullableArray3[9] = new byte?((byte)81);
+            nullableArray3[10] = new byte?((byte)84);
+            nullableArray3[11] = new byte?((byte)73);
+            nullableArray3[12] = new byte?((byte)139);
+            nullableArray3[13] = new byte?((byte)248);
+            nullableArray3[14] = new byte?((byte)72);
+            nullableArray3[15] = new byte?((byte)139);
+            nullableArray3[16] = new byte?((byte)13);
+            MainWindow.pattern_3 = nullableArray3;
+            byte?[] nullableArray4 = new byte?[37];
+            nullableArray4[0] = new byte?((byte)72);
+            nullableArray4[1] = new byte?((byte)139);
+            nullableArray4[2] = new byte?((byte)13);
+            nullableArray4[7] = new byte?((byte)72);
+            nullableArray4[8] = new byte?((byte)141);
+            nullableArray4[9] = new byte?((byte)84);
+            nullableArray4[10] = new byte?((byte)36);
+            nullableArray4[11] = new byte?((byte)56);
+            nullableArray4[12] = new byte?((byte)198);
+            nullableArray4[13] = new byte?((byte)68);
+            nullableArray4[14] = new byte?((byte)36);
+            nullableArray4[15] = new byte?((byte)32);
+            nullableArray4[16] = new byte?((byte)0);
+            nullableArray4[17] = new byte?((byte)77);
+            nullableArray4[18] = new byte?((byte)139);
+            nullableArray4[19] = new byte?((byte)64);
+            nullableArray4[20] = new byte?((byte)8);
+            nullableArray4[21] = new byte?((byte)232);
+            nullableArray4[26] = new byte?((byte)72);
+            nullableArray4[27] = new byte?((byte)139);
+            nullableArray4[28] = new byte?((byte)92);
+            nullableArray4[29] = new byte?((byte)36);
+            nullableArray4[30] = new byte?((byte)96);
+            nullableArray4[31] = new byte?((byte)72);
+            nullableArray4[32] = new byte?((byte)131);
+            nullableArray4[33] = new byte?((byte)196);
+            nullableArray4[34] = new byte?((byte)80);
+            nullableArray4[35] = new byte?((byte)95);
+            nullableArray4[36] = new byte?((byte)195);
+            MainWindow.pattern_4 = nullableArray4;
+        //    MainWindow.player_colors = new Color[4]
+        //    {
+        //Color.FromRgb((byte) 225, (byte) 65, (byte) 55),
+        //Color.FromRgb((byte) 53, (byte) 136, (byte) 227),
+        //Color.FromRgb((byte) 196, (byte) 172, (byte) 44),
+        //Color.FromRgb((byte) 42, (byte) 208, (byte) 55)
+        //    };
         }
 
     }

@@ -60,6 +60,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="memory.cs" />
     <Compile Include="mhw.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Properties\Resources.cs" />
