@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mhw_dps_wpf"
         Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" MouseDown="Window_MouseDown" MouseWheel="Window_MouseWheel"
-        Title="mhw_dps_display" Height="187" Width="400" MinWidth="300" MinHeight="140"
+        Title="mhw_dps_display" Height="318.357" Width="400" MinWidth="300" MinHeight="140"
         Background="Transparent">
-  <Grid>
-    <Canvas Name="front_canvas" Grid.Row="1" Grid.Column="0"/>
-  </Grid>
+    <Grid>
+        <Canvas Name="front_canvas" Grid.Column="0" Margin="0,58,0,0"/>
+        <Canvas Name="monster_hp_ui" Grid.Column="0" Margin="0,0,0,230.8"/>
+    </Grid>
 </Window>

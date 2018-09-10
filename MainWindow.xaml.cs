@@ -35,7 +35,11 @@ namespace mhw_dps_wpf
         private int[] player_damages = new int[4] { 0, 0, 0, 0 };
         private int[] prev_player_damages = new int[4] { 0, 0, 0, 0 };
         private float[] player_damages_avg = new float[4] { 0, 0, 0, 0 };
+        private float monster_hp = 0;
+        private float monster_max_hp = 0;
+        private float monter_percen = 0;
         private int my_seat_id = -5;
+        private TextBlock[] monster_hp_txt = new TextBlock[1];
         private Rectangle[] damage_bar_rects = new Rectangle[4];
         private TextBlock[] player_name_tbs = new TextBlock[4];
         private TextBlock[] player_dmg_tbs = new TextBlock[4];
@@ -104,6 +108,19 @@ namespace mhw_dps_wpf
                 Application.Current.Shutdown();
             if (!this.init_finished)
                 return;
+
+
+            this.monster_hp = mhw.get_monster_hp(this.game);
+            this.monster_max_hp = mhw.get_monster_max_hp(this.game);
+
+            //Console.WriteLine("monster_hp = " + monster_hp);
+            if (this.monster_max_hp == 0)
+                this.monster_hp_txt[0].Text = "";
+            else
+            {
+                this.monter_percen = (this.monster_hp / this.monster_max_hp) * 100;
+                this.monster_hp_txt[0].Text = this.monster_hp + "/" + this.monster_max_hp + "( " + this.monter_percen + "% )";
+            }
             int[] teamDmg = mhw.get_team_dmg(this.game);
             string[] teamPlayerNames = mhw.get_team_player_names(this.game);
             int playerSeatId = mhw.get_player_seat_id(this.game);
@@ -116,7 +133,7 @@ namespace mhw_dps_wpf
                     Array.Clear(this.prev_player_damages, 0, this.prev_player_damages.Length);
                     Array.Clear(this.player_damages, 0, this.player_damages.Length);
                 }
-                
+
                 this.prev_player_damages = this.player_damages;
                 this.player_damages = teamDmg;
                 this.player_names = teamPlayerNames;
@@ -137,6 +154,7 @@ namespace mhw_dps_wpf
             }
         }
 
+
         private void update_info(bool quest_end)
         {
             if (!this.init_finished)
@@ -149,7 +167,7 @@ namespace mhw_dps_wpf
                     float dps = this.player_damages[index] / (float)(this.quest_end - this.first_damage).TotalSeconds;
                     this.player_name_tbs[index].Text = this.player_names[index];
                     this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : this.player_damages[index].ToString() + " (" + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "%) " + dps.ToString("0.0") + " DPS ";
-        
+
                     this.player_dmg_tbs[index].TextAlignment = TextAlignment.Right;
                 }
             }
@@ -161,10 +179,12 @@ namespace mhw_dps_wpf
                     this.player_damages_avg[index] -= this.player_damages_avg[index] / 8;
                     this.player_damages_avg[index] += new_sample / 8;
                     this.player_name_tbs[index].Text = this.player_names[index];
-                    this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : " " + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "% " + this.player_damages_avg[index].ToString("0.0") + " DPS ";
+                    //this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : " " + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "% " + this.player_damages_avg[index].ToString("0.0") + " DPS ";
+                    this.player_dmg_tbs[index].Text = this.player_names[index] == "" ? "" : this.player_damages[index].ToString() + " (" + ((float)((double)this.player_damages[index] / (double)num * 100.0)).ToString("0.0") + "%) " + this.player_damages_avg[index].ToString("0.0") + " DPS ";
 
                     this.player_dmg_tbs[index].TextAlignment = TextAlignment.Right;
                 }
+                //Console.WriteLine(this.monster_hp);
                 if (num == 0)
                 {
                     for (int index = 0; index < 4; ++index)
@@ -218,11 +238,37 @@ namespace mhw_dps_wpf
             }
         }
 
+        private void add_monter_hp()
+        {
+            //monster hp
+            this.monster_hp_txt[0] = new TextBlock();
+            this.monster_hp_txt[0].FontSize = 16.0;
+            this.monster_hp_txt[0].Width = 220.0;
+            this.monster_hp_txt[0].Height = 40.0;
+            this.monster_hp_txt[0].FontWeight = FontWeights.Bold;
+            this.monster_hp_txt[0].Foreground = (Brush)new SolidColorBrush(Colors.White);
+            this.monster_hp_txt[0].Effect = (Effect)new DropShadowEffect()
+            {
+                ShadowDepth = 0.0,
+                Color = Colors.Black,
+                BlurRadius = 4.0,
+                Opacity = 1.0
+            };
+            Canvas.SetTop((UIElement)this.monster_hp_txt[0], 0);
+            Canvas.SetLeft((UIElement)this.monster_hp_txt[0], 0);
+            this.monster_hp_ui.Children.Add((UIElement)this.monster_hp_txt[0]);
+            this.monster_hp_txt[0].Text = "Monster HP Here";
+
+            //
+        }
+
         private void init_canvas()
         {
             this.init_finished = true;
             double num1 = this.front_canvas.ActualHeight * 0.200000002980232 - 1.75;
             double num2 = (this.front_canvas.ActualHeight - num1) / 3.0;
+
+            this.add_monter_hp();
             for (int index = 0; index < 4; ++index)
             {
                 this.damage_bar_rects[index] = new Rectangle();
@@ -453,13 +499,13 @@ namespace mhw_dps_wpf
             nullableArray4[35] = new byte?((byte)95);
             nullableArray4[36] = new byte?((byte)195);
             MainWindow.pattern_4 = nullableArray4;
-        //    MainWindow.player_colors = new Color[4]
-        //    {
-        //Color.FromRgb((byte) 225, (byte) 65, (byte) 55),
-        //Color.FromRgb((byte) 53, (byte) 136, (byte) 227),
-        //Color.FromRgb((byte) 196, (byte) 172, (byte) 44),
-        //Color.FromRgb((byte) 42, (byte) 208, (byte) 55)
-        //    };
+            //    MainWindow.player_colors = new Color[4]
+            //    {
+            //Color.FromRgb((byte) 225, (byte) 65, (byte) 55),
+            //Color.FromRgb((byte) 53, (byte) 136, (byte) 227),
+            //Color.FromRgb((byte) 196, (byte) 172, (byte) 44),
+            //Color.FromRgb((byte) 42, (byte) 208, (byte) 55)
+            //    };
         }
 
     }
