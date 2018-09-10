@@ -97,6 +97,62 @@ public static class mhw
         return num3;
     }
 
+    public static float get_monster_hp(Process proc)
+    {
+
+        byte[] lpBuffer = new byte[8];
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)0x143B20D98, lpBuffer);
+        ulong num1 = BitConverter.ToUInt64(lpBuffer, 0) + 0x168;
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)num1, lpBuffer);
+        ulong num2 = BitConverter.ToUInt64(lpBuffer, 0) + 0x8A8;
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)num2, lpBuffer);
+        ulong num3 = BitConverter.ToUInt64(lpBuffer, 0) + 0x3B0;
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)num3, lpBuffer);
+        ulong num4 = BitConverter.ToUInt64(lpBuffer, 0) + 0x18;
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)num4, lpBuffer);
+        ulong num5 = BitConverter.ToUInt64(lpBuffer, 0) + 0x58;
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)num5, lpBuffer);
+        ulong num6 = BitConverter.ToUInt64(lpBuffer, 0) + 0x64;
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)num6, lpBuffer);
+
+        return BitConverter.ToSingle(lpBuffer, 0);
+    }
+
+    public static float get_monster_max_hp(Process proc)
+    {
+
+        byte[] lpBuffer = new byte[8];
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)0x143B20D98, lpBuffer);
+        ulong num1 = BitConverter.ToUInt64(lpBuffer, 0) + 0x168;
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)num1, lpBuffer);
+        ulong num2 = BitConverter.ToUInt64(lpBuffer, 0) + 0x8A8;
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)num2, lpBuffer);
+        ulong num3 = BitConverter.ToUInt64(lpBuffer, 0) + 0x3B0;
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)num3, lpBuffer);
+        ulong num4 = BitConverter.ToUInt64(lpBuffer, 0) + 0x18;
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)num4, lpBuffer);
+        ulong num5 = BitConverter.ToUInt64(lpBuffer, 0) + 0x58;
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)num5, lpBuffer);
+        ulong num6 = BitConverter.ToUInt64(lpBuffer, 0) + 0x60;
+
+        mhw.ReadProcessMemory(proc.Handle, (IntPtr)num6, lpBuffer);
+
+        return BitConverter.ToSingle(lpBuffer, 0);
+    }
+
     public static string[] get_team_player_names(Process proc)
     {
         string[] strArray = new string[4];
